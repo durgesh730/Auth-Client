@@ -3,33 +3,15 @@ import './header.css'
 import Avatar from '@mui/material/Avatar';
 import { LoginContext } from './ContextProvider/Context';
 import { useNavigate } from 'react-router-dom';
-import { host } from '../Host';
 
 const Header = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
     const history = useNavigate();
 
-    const logoutuser = async () => {
-        let token = localStorage.getItem("usersdatatoken");
-
-        const res = await fetch(`${host}logout`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": token,
-                Accept: "application/json"
-            },
-            credentials: "include"
-        });
-
-        const data = await res.json();
-        if (data.status === 201) {
-            localStorage.removeItem("usersdatatoken");
-            setLoginData(false)
-            history("/");
-        } else {
-            console.log("error")
-        }
+    const logoutuser = () => {
+        history("/");
+        setLoginData(false)
+        localStorage.removeItem("usersdatatoken");
     }
 
     return (
