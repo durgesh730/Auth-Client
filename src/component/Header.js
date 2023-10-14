@@ -3,6 +3,7 @@ import './header.css'
 import Avatar from '@mui/material/Avatar';
 import { LoginContext } from './ContextProvider/Context';
 import { useNavigate } from 'react-router-dom';
+import { host } from '../Host';
 
 const Header = () => {
     const { logindata, setLoginData } = useContext(LoginContext);
@@ -11,7 +12,7 @@ const Header = () => {
     const logoutuser = async () => {
         let token = localStorage.getItem("usersdatatoken");
 
-        const res = await fetch("/logout", {
+        const res = await fetch(`${host}logout`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
